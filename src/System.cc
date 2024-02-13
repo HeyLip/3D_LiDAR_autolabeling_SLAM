@@ -94,7 +94,6 @@ System::System(const string &strVocFile, const string &strSettingsFile, const st
     py::module io_utils = py::module::import("reconstruct.utils");
     string pyCfgPath = fSettings["DetectorConfigPath"].string();
     pyCfg = io_utils.attr("get_configs")(pyCfgPath);
-    pyDecoder = io_utils.attr("get_decoder")(pyCfg);
     pySequence = py::module::import("reconstruct").attr("get_sequence")(strSequencePath, pyCfg);
     InitThread();
 

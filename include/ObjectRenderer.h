@@ -27,7 +27,7 @@ namespace ORB_SLAM2 {
 class Object {
 public:
 
-    Object(const std::string &path_mesh);
+    Object();
 
     Object(const Eigen::MatrixXf &vertices, const Eigen::MatrixXi &faces);
 

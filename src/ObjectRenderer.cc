@@ -19,52 +19,11 @@
 
 namespace ORB_SLAM2 {
 
-Object::Object(const std::string &path_mesh) :
+Object::Object() :
         mean(0, 0, 0),
         stddev(1, 1, 1),
         norm_factor(1) {
-    pangolin::Geometry geometry = pangolin::LoadGeometry(path_mesh);
-    object_gl = pangolin::ToGlGeometry(geometry);
-}
 
-Object::Object(const Eigen::MatrixXf &vertices, const Eigen::MatrixXi &faces) :
-        mean(0, 0, 0),
-        stddev(1, 1, 1),
-        norm_factor(1) {
-    if (vertices.cols() != 3) {
-        throw std::invalid_argument("Only 3D vertices are supported");
-    }
-    if (faces.cols() != 3) {
-        throw std::invalid_argument("Only triangular faces are supported");
-    }
-
-    size_t num_vertices = vertices.rows();
-    size_t num_faces = faces.rows();
-    pangolin::Geometry geometry;
-
-    // Read vertices
-    pangolin::Geometry::Element &geom_buffer = geometry.buffers["geometry"];
-    geom_buffer.Reinitialise(3 * sizeof(float), num_vertices);
-    pangolin::Image<float> verts = geom_buffer.UnsafeReinterpret<float>().SubImage(0, 0, 3, num_vertices);
-    for (size_t i = 0; i < num_vertices; i++) {
-        for (size_t j = 0; j < 3; j++) {
-            verts(j, i) = vertices(i, j);
-        }
-    }
-    geom_buffer.attributes["vertex"] = verts;
-
-    // Read faces
-    auto faces_buffer = geometry.objects.emplace("object", pangolin::Geometry::Element());
-    faces_buffer->second.Reinitialise(3 * sizeof(uint32_t), num_faces);
-    pangolin::Image<uint32_t> ibo = faces_buffer->second.UnsafeReinterpret<uint32_t>().SubImage(0, 0, 3, num_faces);
-    for (size_t f = 0; f < num_faces; ++f) {
-        for (size_t v = 0; v < 3; ++v) {
-            ibo(v, f) = faces(f, v);
-        }
-    }
-    faces_buffer->second.attributes["vertex_indices"] = ibo;
-
-    object_gl = pangolin::ToGlGeometry(geometry);
 }
 
 ObjectRenderer::ObjectRenderer(size_t w, size_t h, bool offscreen)
@@ -84,17 +43,10 @@ void ObjectRenderer::SetupCamera(double fx, double fy, double cx, double cy, dou
     this->far = far;
 }
 
-uint64_t ObjectRenderer::AddObject(const std::string &mesh_path) {
-    uint64_t identifier = GetNextIdentifier();
-    // objects[identifier] = std::make_shared<Object>(mesh_path);
-    objects[identifier] = new Object(mesh_path);
-    return identifier;
-}
-
 uint64_t ObjectRenderer::AddObject(const Eigen::MatrixXf &vertices, const Eigen::MatrixXi &faces) {
     uint64_t identifier = GetNextIdentifier();
     // objects[identifier] = std::make_shared<Object>(vertices, faces);
-    objects[identifier] = new Object(vertices, faces);
+    objects[identifier] = new Object();
     return identifier;
 }
 

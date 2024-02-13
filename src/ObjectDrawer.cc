@@ -77,14 +77,7 @@ void ObjectDrawer::DrawObjects(bool bFollow, const Eigen::Matrix4f &Tec)
         Eigen::Matrix4f Sim3Two = pMO->GetPoseSim3();
         int idx = pMO->GetRenderId();
 
-//        if (bFollow) {
-//            SE3TcwFollow = SE3Tcw;
-//        }
-//        if (pMO->GetRenderId() >= 0)
-//        {
-//            mpRenderer->Render(idx, Tec * SE3TcwFollow * Sim3Two, mvObjectColors[pMO->GetRenderId() % mvObjectColors.size()]);
-//        }
-         DrawCuboid(pMO);
+        DrawCuboid(pMO);
     }
 }
 
@@ -103,7 +96,7 @@ void ObjectDrawer::DrawCuboid(MapObject *pMO)
     glMultMatrixd(Two.m);
 #endif
 
-    const float mCuboidLineWidth = 3.0;
+    const float mCuboidLineWidth = 10.0f;
     glLineWidth(mCuboidLineWidth);
     glColor3f(std::get<0>(mvObjectColors[pMO->GetRenderId() % mvObjectColors.size()]),std::get<1>(mvObjectColors[pMO->GetRenderId() % mvObjectColors.size()]),std::get<2>(mvObjectColors[pMO->GetRenderId() % mvObjectColors.size()]));
     glBegin(GL_LINES);

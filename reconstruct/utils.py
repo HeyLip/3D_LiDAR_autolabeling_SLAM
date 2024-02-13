@@ -21,7 +21,6 @@ import json
 from addict import Dict
 import plyfile
 import skimage.measure as measure
-from deep_sdf.workspace import config_decoder
 
 # colors used for visualization
 color_table = [[230. / 255., 0., 0.],  # red
@@ -87,12 +86,7 @@ class ForceKeyErrorDict(Dict):
 def get_configs(cfg_file):
     with open(cfg_file) as f:
         cfg_dict = json.load(f)
-    return ForceKeyErrorDict(**cfg_dict)
-
-
-def get_decoder(configs):
-    return config_decoder(configs.DeepSDF_DIR)
-
+    return ForceKeyErrorDict(**cfg_dict)\
 
 def create_voxel_grid(vol_dim=128):
     voxel_origin = [-1, -1, -1]

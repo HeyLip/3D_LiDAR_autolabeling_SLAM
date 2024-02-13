@@ -79,8 +79,6 @@ public:
     void GetNewObservations();
     void CreateNewMapObjects();
     void MapObjectCulling();
-    void CreateNewObjectsFromDetections();
-    void ProcessDetectedObjects();
     py::object pyOptimizer;
     py::object pyMeshExtractor;
     int nLastReconKFID;

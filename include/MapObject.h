@@ -32,7 +32,7 @@ class Frame;
 class MapObject {
 public:
     MapObject(const Eigen::Matrix4f &T, const Eigen::Vector<float, 64> &vCode, KeyFrame *pRefKF, Map *pMap);
-    MapObject(const Eigen::Matrix4f &T, const Eigen::Vector<float, 64> &vCode, KeyFrame *pRefKF, Map *pMap, float object_width, float object_height, float object_length);
+    MapObject(const Eigen::Matrix4f &T, KeyFrame *pRefKF, Map *pMap, float object_width, float object_height, float object_length);
     MapObject(KeyFrame *pRefKF, Map *pMap);
 
     void AddObservation(KeyFrame *pKF, int idx);

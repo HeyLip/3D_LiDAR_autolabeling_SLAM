@@ -52,7 +52,7 @@ MapObject::MapObject(const Eigen::Matrix4f &T, const Eigen::Vector<float, 64> &v
     mnId = nNextId++;
 }
 
-    MapObject::MapObject(const Eigen::Matrix4f &T, const Eigen::Vector<float, 64> &vCode, KeyFrame *pRefKF, Map *pMap, float object_width, float object_height, float object_length) :
+    MapObject::MapObject(const Eigen::Matrix4f &T, KeyFrame *pRefKF, Map *pMap, float object_width, float object_height, float object_length) :
             mpRefKF(pRefKF), mpNewestKF(pRefKF), mnBALocalForKF(0), mnAssoRefID(0), mnFirstKFid(pRefKF->mnId),
             mnCorrectedByKF(0), mnCorrectedReference(0), mnLoopObjectForKF(0), mnBAGlobalForKF(0),
             w(object_width), h(object_height), l(object_length), mbBad(false), mbDynamic(false), mpMap(pMap), nObs(0), mRenderId(-1)
@@ -75,7 +75,6 @@ MapObject::MapObject(const Eigen::Matrix4f &T, const Eigen::Vector<float, 64> &v
         SE3Two.topRightCorner<3, 1>() = two;
         SE3Tow = SE3Two.inverse();
 
-        vShapeCode = vCode;
         velocity = Eigen::Vector3f::Zero();
         mnId = nNextId++;
 

@@ -35,9 +35,6 @@ LocalMapping::LocalMapping(System *pSys, Map *pMap, ObjectDrawer* pObjectDrawer,
     mpMap(pMap), mpObjectDrawer(pObjectDrawer), mbAbortBA(false), mbStopped(false),
     mbStopRequested(false), mbNotStop(false), mbAcceptKeyFrames(true)
 {
-    py::module optim  = py::module::import("reconstruct.optimizer");
-    pyOptimizer = optim.attr("Optimizer")(pSys->pyDecoder, pSys->pyCfg);
-    pyMeshExtractor = optim.attr("MeshExtractor")(pSys->pyDecoder, pSys->pyCfg.attr("optimizer").attr("code_len"), pSys->pyCfg.attr("voxels_dim"));
     mpLastKeyFrame = static_cast<KeyFrame*>(NULL);
     nLastReconKFID = 0;
 }
@@ -95,16 +92,7 @@ void LocalMapping::Run()
                 // Create new MapObjects
                 CreateNewMapObjects();
             }
-            else if (mpTracker->mSensor == System::MONOCULAR)
-            {
-                if (mpTracker->mState != Tracking::NOT_INITIALIZED)
-                {
-                    if (mpMap->GetAllMapObjects().empty())
-                        CreateNewObjectsFromDetections();
-                    // reconstruction
-                    ProcessDetectedObjects();
-                }
-            }
+            
             if (!stopRequested())
                 mbAbortBA = false;
 
