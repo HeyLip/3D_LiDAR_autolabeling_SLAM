@@ -20,7 +20,7 @@
 #   - ./Thirdparty/DBoW2
 #   5. Create conda env with PyTorch 1.10
 #   6. Install mmdetection and mmdetection3d
-#   7. Build DSP-SLAM
+#   7. Build HSNS-SLAM
 
 # Function that executes the clone command given as $1 iff repo does not exist yet. Otherwise pulls.
 # Only works if repository path ends with '.git'
@@ -170,7 +170,7 @@ fi # --create-conda-env
 
 conda_base=$(conda info --base)
 source "$conda_base/etc/profile.d/conda.sh"
-conda activate dsp-slam
+conda activate hsns-slam
 
 highlight "Installing mmdetection and mmdetection3d ..."
 pip install pycocotools==2.0.1
