@@ -47,7 +47,7 @@ make -j8
 
 After successfully building HSNS-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
 
-# 3. Running DSP-SLAM
+# 3. Running HSNS-SLAM
 
 ## Dataset
 You can download the example sequences and pre-trained network model weights (DeepSDF, MaskRCNN, PointPillars) from [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabjw4_ucl_ac_uk/Eh3nHv6D-LZHkuny4iNOexQBGdDVxloM_nwbEZdxeRfStw?e=sYO1Ot). It contains example sequences of [KITTI](http://www.cvlibs.net/datasets/kitti/eval_odometry.php), [Freiburg Cars](https://github.com/lmb-freiburg/unsup-car-dataset) and [Redwood Chairs](http://redwood-data.org/3dscan/dataset.html?c=chair) dataset.
