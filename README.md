@@ -28,7 +28,6 @@ You can simply run:
 
 and it will set up all the dependencies and build DSP-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build DSP-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
 
-https://www.youtube.com/watch?v=gf3xLTTU2hM
 
 ## CMake options:
 When building DSP-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
@@ -46,7 +45,7 @@ cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
 make -j8
 ```
 
-After successfully building DSP-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
+After successfully building HSNS-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
 
 # 3. Running DSP-SLAM
 
