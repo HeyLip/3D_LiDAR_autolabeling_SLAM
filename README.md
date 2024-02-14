@@ -1,76 +1,16 @@
-# DSP-SLAM
-### [Project Page](https://jingwenwang95.github.io/dsp-slam/) | [Video](https://youtu.be/of4ANH24LP4) | [Video (Bilibili)](https://www.bilibili.com/video/BV1yf4y1H7ib/) | [Paper](https://arxiv.org/abs/2108.09481)
-This repository contains code for DSP-SLAM, an object-oriented SLAM system that builds a rich and accurate joint map of dense 3D models for foreground objects, and sparse landmark points to represent the background. DSP-SLAM takes as input the 3D point cloud reconstructed by a feature-based SLAM system and equips it with the ability to enhance its sparse map with dense reconstructions of detected objects. Objects are detected via semantic instance segmentation, and their shape and pose are estimated using category-specific deep shape embeddings as priors, via a novel second order optimization.  Our object-aware bundle adjustment builds a pose-graph to jointly optimize camera poses, object locations and feature points. DSP-SLAM can operate at 10 frames per second on 3 different input modalities: monocular, stereo, or stereo+LiDAR.
+# HSNS-SLAM
 
-More information and the paper can be found at our [project page](https://jingwenwang95.github.io/dsp-slam/).
-
-[![Figure of DSP-SLAM](figures/teaser.png "Click me to see a video.")](https://youtu.be/spNJlU982L4)
+https://www.youtube.com/watch?v=gf3xLTTU2hM
 
 ## Publication
 
-[DSP-SLAM: Object Oriented SLAM with Deep Shape Priors](https://arxiv.org/abs/2108.09481), Jingwen Wang, [Martin Rünz](https://www.martinruenz.de/), [Lourdes Agapito](http://www0.cs.ucl.ac.uk/staff/L.Agapito/), 3DV '21
-
-If you find our work useful, please consider citing our paper:
-```
-@inproceedings{wang2021dspslam,
-  author={Jingwen Wang and Martin Rünz and Lourdes Agapito},
-  booktitle={2021 International Conference on 3D Vision (3DV)},
-  title={DSP-SLAM: Object Oriented SLAM with Deep Shape Priors},
-  pages={1362--1371}
-  year={2021}
-  organization={IEEE}
+@inproceedings{
+  author={Lee Harim, Park Sungjun, Lee Yeojin},
+  title={HSNS-SLAM},
+  year={2024}
 }
-```
 
-## Important Updates
-**[16 Mar 2022]**: Due to some major changes in mmdetection3d, some components (such as detector weights) in this project no longer works with the latest mmdetection3d. I have updated the building scripts so that everything follows exactly the same setting as when this project was released.
-
-# 1. Prerequisites
-We have conducted most experiments and testings in Ubuntu 18.04 and 20.04, but it should also be possible to compile in other versions. You also need a powerful GPU to run DSP-SLAM, we have tested with RTX-2080 and RTX-3080. 
-
-## TL;DR
-We provide two building scripts which will install all the dependencies and build DSP-SLAM for you. Jump to [here](#building-script) for more details. If you want to have a more flexible installation then please read through this section carefully and refer to those two scripts as guidance. 
-
-## C++17
-We have used many new features in C++17, so please make sure your C++ compiler supports C++17. For g++ versions, we have tested with g++-7, g++-8 and g++-9.
-
-## OpenCV
-We use [OpenCV](https://github.com/opencv/opencv) for image related operations. Please make sure you have at least version 3.2. We have tested with OpenCV 3.4.1.
-
-## Eigen3
-We use [Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page) for matrix operations. Please make sure your Eigen3 version is at least 3.4.0. There is known compilation errors for lower versions.
-
-## Pangolin
-Pangolin is used for visualization the reconstruction result. Dowload and install instructions can be found at: https://github.com/stevenlovegrove/Pangolin.
-
-## DBoW2 and g2o (included in Thirdparty folder)
-We use modified versions of the [DBoW2](https://github.com/dorian3d/DBoW2) library to perform place recognition and [g2o](https://github.com/RainerKuemmerle/g2o) library to perform non-linear optimizations. Both modified libraries (which are BSD) are included in the *Thirdparty* folder.
-
-## pybind11 (included in project root directory)
-As our shape reconstruction is implemented in Python, we need to enable communication between C++ and Python using pybin11. It is added as a submodule in this project, you just need to make sure you specify option `--recursive` when cloning the repository.
-
-## Python Dependencies
-Our prior-based object reconstruction is implemented in Python with PyTorch, which also requires MaskRCNN and PointPillars for 2D and 3D detection. 
-* Python3 (tested with 3.7 and 3.8) and PyTorch (tested with 1.10) with CUDA (tested with 11.3 and 10.2)
-* [mmdetection](https://github.com/open-mmlab/mmdetection) and [mmdetection3d](https://github.com/open-mmlab/mmdetection3d)
-* Others: addict, plyfile, opencv-python, open3d
-
-Compiling and installing mmdetection3d will require `nvcc`, so you need to make sure the CUDA version installed using `conda` matches the CUDA installed under your `usr/local/cuda-*`. `e.g.` If you have CUDA 10.2 installed under `/usr/local/cuda` and would like to install PyTorch 1.10, you need to install the prebuilt PyTorch with CUDA 10.2.
-
-```
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
-```
-
-You can check the supported CUDA version for precompiled packages on the [PyTorch website](https://pytorch.org/). We have provided two example environment files which have CUDA 10.2/11.3 and PyTorch 1.10 for your reference. If you have CUDA 10.2 or CUDA 11.3 installed in your `/usr/local`, you can use it to set up your Python environment:
-
-```
-conda env create -f environment.yml
-conda activate dsp-slam
-``` 
-
-Then you will still need to install mmdetection and mmdetection3d mannually. More details instruction can be found [here](https://github.com/open-mmlab/mmdetection3d/blob/master/docs/getting_started.md).
-
-# 2. Building DSP-SLAM
+# 2. Building HSNS-SLAM
 
 Clone the repository:
 ```
@@ -87,6 +27,8 @@ You can simply run:
 ```
 
 and it will set up all the dependencies and build DSP-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build DSP-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
+
+https://www.youtube.com/watch?v=gf3xLTTU2hM
 
 ## CMake options:
 When building DSP-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
