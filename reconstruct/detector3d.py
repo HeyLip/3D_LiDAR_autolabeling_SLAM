@@ -64,6 +64,5 @@ class Detector3D(object):
         valid_mask = (labels == 0) & (scores > 0.0)
         boxes = predictions[0]["boxes_3d"].tensor
 
-
         return boxes[valid_mask]
 

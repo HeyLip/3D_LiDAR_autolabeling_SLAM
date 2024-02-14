@@ -30,13 +30,11 @@ class FrameWithLiDAR:
         self.configs = sequence.configs
         self.rgb_dir = sequence.rgb_dir
         self.velo_dir = sequence.velo_dir
-        self.lbl2d_dir = sequence.lbl2d_dir
         self.lbl3d_dir = sequence.lbl3d_dir
         self.K = sequence.K_cam
         self.invK = sequence.invK_cam
         self.T_cam_velo = sequence.T_cam_velo
         self.online = sequence.online
-        self.detector_2d = sequence.detector_2d
         self.detector_3d = sequence.detector_3d
         self.max_lidar_pts = self.configs.num_lidar_max
         self.min_lidar_pts = self.configs.num_lidar_min
@@ -93,8 +91,7 @@ class FrameWithLiDAR:
 
     def get_labels(self):
         labels_3d = self.detector_3d.make_prediction(self.velo_file).cpu().numpy()
-        labels_2d = self.detector_2d.make_prediction(self.img_bgr)
-        return labels_2d, labels_3d
+        return labels_3d
 
     def get_detections(self):
         # Get 3D Detection first
@@ -102,9 +99,9 @@ class FrameWithLiDAR:
         # get lidar points here
         if self.online:
             detections_3d = self.detector_3d.make_prediction(self.velo_file).cpu().numpy()
-        # else:
-        #     label_path_3d = os.path.join(self.lbl3d_dir, "%06d.lbl" % self.frame_id)
-        #     detections_3d = torch.load(label_path_3d)
+        else:
+            label_path_3d = os.path.join(self.lbl3d_dir, "%06d.lbl" % self.frame_id)
+            detections_3d = torch.load(label_path_3d)
         t2 = get_time()
         print("3D detector takes %f seconds" % (t2 - t1))
 
@@ -188,13 +185,11 @@ class KITIISequence:
         self.configs = configs
         self.online = self.configs.detect_online
         # Pre-stored label path
-        self.lbl2d_dir = self.configs.path_label_2d
         self.lbl3d_dir = self.configs.path_label_3d
         if not self.online:
-            assert self.lbl2d_dir is not None, print()
             assert self.lbl3d_dir is not None, print()
         # Detectors
-        self.detector_2d, self.detector_3d = get_detectors(self.configs)
+        self.detector_3d = get_detectors(self.configs)
         self.current_frame = None
         self.detections_in_current_frame = None
 
@@ -221,14 +216,11 @@ class KITIISequence:
         return self.detections_in_current_frame
 
     def get_labels_and_save(self):
-        if not os.path.exists(self.lbl2d_dir):
-            os.makedirs(self.lbl2d_dir)
         if not os.path.exists(self.lbl3d_dir):
             os.makedirs(self.lbl3d_dir)
 
         for frame_id in range(0, self.num_frames):
             frame = FrameWithLiDAR(self, frame_id)
-            labels_2d, labels_3d = frame.get_labels()
-            torch.save(labels_2d, os.path.join(self.lbl2d_dir, "%06d.lbl" % frame_id))
+            labels_3d = frame.get_labels()
             torch.save(labels_3d, os.path.join(self.lbl3d_dir, "%06d.lbl" % frame_id))
             print("Finished saving frame %d" % frame_id)
