@@ -36,7 +36,7 @@ When building DSP-SLAM the following CMake options are mandatory: `PYTHON_LIBRAR
 Once you have set up the dependencies, you can build DSP-SLAM: 
 
 ```
-# (assume you are under DSP-SLAM project directory)
+# (assume you are under HSNS-SLAM project directory)
 mkdir build
 cd build
 cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
@@ -46,7 +46,7 @@ cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
 make -j8
 ```
 
-After successfully building DSP-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **dsp_slam** and **dsp_slam_mono** under project root directory.
+After successfully building DSP-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
 
 # 3. Running DSP-SLAM
 
