@@ -1,5 +1,5 @@
 cmake_policy(SET CMP0048 NEW)
-project("DSP-SLAM")
+project("HSNS-SLAM")
 cmake_minimum_required(VERSION 3.2)
 
 # c++ version
@@ -76,9 +76,5 @@ target_link_libraries(${PROJECT_NAME}
         )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_executable(dsp_slam dsp_slam.cc)
-target_link_libraries(dsp_slam ${PROJECT_NAME})
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_executable(dsp_slam_mono dsp_slam_mono.cc)
-target_link_libraries(dsp_slam_mono ${PROJECT_NAME})
+add_executable(hsns_slam hsns_slam.cc)
+target_link_libraries(hsns_slam ${PROJECT_NAME})
