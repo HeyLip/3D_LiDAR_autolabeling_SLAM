@@ -1,4 +1,4 @@
-name: dsp-slam
+name: hsns-slam
 channels:
   - open3d-admin
   - pytorch
