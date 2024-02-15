@@ -1,6 +1,6 @@
 # HSNS-SLAM
 
-https://www.youtube.com/watch?v=gf3xLTTU2hM
+[https://www.youtube.com/watch?v=gf3xLTTU2hM](https://youtu.be/xc8WTAzaojE)
 
 ## Publication
 
