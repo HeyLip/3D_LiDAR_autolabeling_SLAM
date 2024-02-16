@@ -1,5 +1,5 @@
 #
-# This file is part of https://github.com/JingwenWang95/DSP-SLAM
+# This file is part of https://github.com/HeyLip/3D_LiDAR_autolabeling_SLAM.git
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

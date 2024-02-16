@@ -31,7 +31,7 @@ Camera.RGB: 1
 ThDepth: 40
 
 # Config path for Python detectors
-DetectorConfigPath: /home/jingwen/Vision/dev/DSP-SLAM/configs/config_kitti.json
+DetectorConfigPath: 3D_LiDAR_autolabeling-SLAM/configs/config_kitti.json
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters

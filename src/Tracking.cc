@@ -147,7 +147,6 @@ Tracking::Tracking(System *pSys, ORBVocabulary* pVoc, FrameDrawer *pFrameDrawer,
         else
             mDepthMapFactor = 1.0f/mDepthMapFactor;
     }
-    // Object SLAM by Jingwen
     if (sensor == System::MONOCULAR)
     {
         maskErrosion = fSettings["Objects.maskErrosion"];

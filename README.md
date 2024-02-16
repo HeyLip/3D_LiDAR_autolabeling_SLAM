@@ -1,41 +1,33 @@
-# HSNS-SLAM
+# 3D_LiDAR_autolabeling-SLAM
 
 [https://www.youtube.com/watch?v=gf3xLTTU2hM](https://youtu.be/xc8WTAzaojE)
 
-## Publication
-
-@inproceedings{
-  author={Lee Harim, Park Sungjun, Lee Yeojin},
-  title={HSNS-SLAM},
-  year={2024}
-}
-
-# 1. Building HSNS-SLAM
+# 1. Building 3D_LiDAR_autolabeling-SLAM
 
 Clone the repository:
 ```
-git clone --recursive https://github.com/HeyLip/HSNS_SLAM.git
+git clone https://github.com/HeyLip/3D_LiDAR_autolabeling_SLAM.git
 ```
 
 ## Building script
-For your convenience, we provide a building script `build_cuda102.sh` and `build_cuda113.sh` which show step-by-step how HSNS-SLAM is built and which dependencies are required. Those scripts will install everything for you including CUDA (version is specified in the script name) and assume you have CUDA driver (support at least CUDA 10.2) and Anaconda installed on your computer. You can select whichever you want. `e.g.` If you your GPU is RTX-30 series which doesn't support CUDA 10 you can try with the one with CUDA 11.3. 
+For your convenience, we provide a building script `build_cuda113.sh` which show step-by-step how 3D_LiDAR_autolabeling-SLAM is built and which dependencies are required. Those scripts will install everything for you including CUDA (version is specified in the script name)
 
 You can simply run:
 
 ```
-./build_cuda***.sh --install-cuda --build-dependencies --create-conda-env
+./build_cuda113.sh --install-cuda --build-dependencies --create-conda-env
 ```
 
-and it will set up all the dependencies and build HSNS-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build HSNS-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
+and it will set up all the dependencies and build 3D_LiDAR_autolabeling-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build 3D_LiDAR_autolabeling-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
 
 
 ## CMake options:
-When building HSNS-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
+When building 3D_LiDAR_autolabeling-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
 
-Once you have set up the dependencies, you can build HSNS-SLAM: 
+Once you have set up the dependencies, you can build 3D_LiDAR_autolabeling-SLAM: 
 
 ```
-# (assume you are under HSNS-SLAM project directory)
+# (assume you are under 3D_LiDAR_autolabeling-SLAM project directory)
 mkdir build
 cd build
 cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
@@ -45,25 +37,25 @@ cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
 make -j8
 ```
 
-After successfully building HSNS-SLAM, you will have **libHSNS-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
+After successfully building 3D_LiDAR_autolabeling-SLAM, you will have **lib3D_LiDAR_autolabeling-SLAM.so**  at *lib* folder and the executables **3D_LiDAR_autolabeling_slam** and under project root directory.
 
-# 2. Running HSNS-SLAM
+# 2. Running 3D_LiDAR_autolabeling-SLAM
 
 ## Dataset
 You can download the example sequences and pre-trained network model weights (DeepSDF, MaskRCNN, PointPillars) from [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabjw4_ucl_ac_uk/Eh3nHv6D-LZHkuny4iNOexQBGdDVxloM_nwbEZdxeRfStw?e=sYO1Ot). It contains example sequences of [KITTI](http://www.cvlibs.net/datasets/kitti/eval_odometry.php), [Freiburg Cars](https://github.com/lmb-freiburg/unsup-car-dataset) and [Redwood Chairs](http://redwood-data.org/3dscan/dataset.html?c=chair) dataset.
 
-## Run HSNS_slam
+## Run 3D_LiDAR_autolabeling_slam
 
-After obtaining the 2 binary executables, you will need to suppy 4 parameters to run the program: 1. path to vocabulary 2. path to .yaml config file 3. path to sequence data directory 4. path to save map. Before running HSNS-SLAM, make sure you run `conda activate HSNS-slam` to activate the correct Python environmrnt. Here are some example usages:
+After obtaining the 2 binary executables, you will need to suppy 4 parameters to run the program: 1. path to vocabulary 2. path to .yaml config file 3. path to sequence data directory 4. path to save map. Before running 3D_LiDAR_autolabeling-SLAM, make sure you run `conda activate 3D_LiDAR_autolabeling-slam` to activate the correct Python environmrnt. Here are some example usages:
 
 For KITTI sequence for example, you can run:
 
 ```
-./HSNS_slam Vocabulary/ORBvoc.bin configs/KITTI04-12.yaml data/kitti/07 map/kitti/07
+./3D_LiDAR_autolabeling_slam Vocabulary/ORBvoc.bin configs/KITTI04-12.yaml data/kitti/07 map/kitti/07
 ```
 
-### Run HSNS-SLAM with offline detector
-If you can successfully build HSNS-SLAM but get errors from Python side when running the program, then you can try supplying pre-stored labels and run HSNS-SLAM with offline detector. We have provided 3D labels for KITTI sequence in the [data](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabjw4_ucl_ac_uk/Eh3nHv6D-LZHkuny4iNOexQBGdDVxloM_nwbEZdxeRfStw?e=sYO1Ot). To run HSNS-SLAM with offline mode, you will need to change the field `detect_online` in the .json config file to `false` and specify the corresponding label path.
+### Run 3D_LiDAR_autolabeling-SLAM with offline detector
+If you can successfully build 3D_LiDAR_autolabeling-SLAM but get errors from Python side when running the program, then you can try supplying pre-stored labels and run 3D_LiDAR_autolabeling-SLAM with offline detector. We have provided 3D labels for KITTI sequence in the [data](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabjw4_ucl_ac_uk/Eh3nHv6D-LZHkuny4iNOexQBGdDVxloM_nwbEZdxeRfStw?e=sYO1Ot). To run 3D_LiDAR_autolabeling-SLAM with offline mode, you will need to change the field `detect_online` in the .json config file to `false` and specify the corresponding label path.
 
 ### Label format
 If you want to create your own labels with your own detectors, you can follow the same format as the labels we provided in the KITTI-07 sequence.
@@ -71,9 +63,11 @@ If you want to create your own labels with your own detectors, you can follow th
 * 2D labels contains MaskRCNN detection boxes and segmentation masks. Each `.lbl` file consists of of a dictionary with two keys: `pred_boxes` and `pred_masks`. Boxes and masks are stored as numpy array of size Nx4 and NxHxW.
 
 # 3. License
-HSNS-SLAM includes the part of third-party open-source software DSP-SLAM, which itself includes third-party open-source software.
+3D_LiDAR_autolabeling-SLAM includes the part of third-party open-source software DSP-SLAM, which itself includes third-party open-source software.
 DSP-SLAM includes the third-party open-source software ORB-SLAM2, which itself includes third-party open-source software. Each of these components have their own license.
-HSNS-SLAM is released under [GPLv3 license](LICENSE) in line with ORB-SLAM2. For a list of all code/library dependencies (and associated licenses), please see [Dependencies.md](Dependencies.md).
+3D_LiDAR_autolabeling-SLAM is released under [GPLv3 license](LICENSE) in line with ORB-SLAM2. For a list of all code/library dependencies (and associated licenses), please see [Dependencies.md](Dependencies.md).
 
 # 4. Acknowledgements
 Research presented here has been supported by the UCL Centre for Doctoral Training in Foundational AI under UKRI grant number EP/S021566/1. We thank [Wonbong Jang](https://sites.google.com/view/wbjang/home) and Adam Sherwood for fruitful discussions. We are also grateful to [Binbin Xu](https://www.doc.ic.ac.uk/~bx516/) and [Xin Kong](https://kxhit.github.io/) for their patient code testing!
+
+Thank you DSP_SLAM, JingwenWang95, https://github.com/JingwenWang95/DSP-SLAM.git

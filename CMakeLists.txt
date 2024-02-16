@@ -1,5 +1,5 @@
 cmake_policy(SET CMP0048 NEW)
-project("HSNS-SLAM")
+project("3D_LiDAR_autolabeling-SLAM")
 cmake_minimum_required(VERSION 3.2)
 
 # c++ version
@@ -76,5 +76,5 @@ target_link_libraries(${PROJECT_NAME}
         )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_executable(hsns_slam hsns_slam.cc)
-target_link_libraries(hsns_slam ${PROJECT_NAME})
+add_executable(3d_lidar_autolabeling_slam 3d_lidar_autolabeling_slam.cc)
+target_link_libraries(3d_lidar_autolabeling_slam ${PROJECT_NAME})

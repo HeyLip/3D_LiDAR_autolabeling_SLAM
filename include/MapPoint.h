@@ -81,7 +81,6 @@ public:
     int PredictScale(const float &currentDist, KeyFrame*pKF);
     int PredictScale(const float &currentDist, Frame* pF);
 
-    // Object SLAM by Jingwen
     bool in_any_object;  // Flag indicating the point belongs to an object
     int object_id; // ID of the associated object
     int keyframe_id_added_to_object; // KF id when added to object

@@ -73,7 +73,6 @@ public:
         return mlNewKeyFrames.size();
     }
 
-    // Object SLAM by Jingwen
     KeyFrame* mpLastKeyFrame;
     std::list<MapObject*> mlpRecentAddedMapObjects;
     void GetNewObservations();

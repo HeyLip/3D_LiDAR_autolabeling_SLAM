@@ -45,7 +45,6 @@ public:
     void DrawCurrentCamera(pangolin::OpenGlMatrix &Twc);
     void SetCurrentCameraPose(const cv::Mat &Tcw);
 
-    // By Jingwen
     std::vector<std::tuple<float, float, float>> mvObjectColors;
     ObjectDrawer* mpObjectDrawer;
     void SetObjectDrawer(ObjectDrawer *pObjectDrawer);

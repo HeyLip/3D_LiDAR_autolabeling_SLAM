@@ -76,7 +76,6 @@ public:
     // Use this function if you have deactivated local mapping and you only want to localize the camera.
     void InformOnlyTracking(const bool &flag);
 
-    // Object SLAM by Jingwen
     // KITTI (stereo+LiDAR)
     void GetObjectDetectionsLiDAR(KeyFrame *pKF);
     void ObjectDataAssociation(KeyFrame *pKF);

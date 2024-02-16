@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# This is a build script for DSP-SLAM.
+# This is a build script for 3D_LiDAR_autolabeling-SLAM.
 #
 # Use parameters:
 # `--install-cuda` to install the NVIDIA CUDA suite
@@ -20,7 +20,7 @@
 #   - ./Thirdparty/DBoW2
 #   5. Create conda env with PyTorch 1.10
 #   6. Install mmdetection and mmdetection3d
-#   7. Build HSNS-SLAM
+#   7. Build 3D_LiDAR_autolabeling-SLAM
 
 # Function that executes the clone command given as $1 iff repo does not exist yet. Otherwise pulls.
 # Only works if repository path ends with '.git'
@@ -35,7 +35,7 @@ function highlight(){
   clr_magentab clr_bold clr_white "$1"
 }
 
-highlight "Starting DSP-SLAM build script ..."
+highlight "Starting 3D_LiDAR_autolabeling-SLAM build script ..."
 echo "Available parameters:
         --install-cuda
         --build-dependencies
@@ -166,47 +166,36 @@ fi # --build-dependencies
 if [[ $* == *--create-conda-env* ]] ; then
   highlight "Creating Python environment ..."
   conda env create -f environment_cuda113.yml
-  conda install -c conda-forge cudatoolkit-dev
 fi # --create-conda-env
 
 conda_base=$(conda info --base)
 source "$conda_base/etc/profile.d/conda.sh"
-conda activate hsns-slam
+conda activate lidar_autolabeling-slam
 
 highlight "Installing mmdetection and mmdetection3d ..."
 pip install pycocotools==2.0.1
-pip install -U openmim
-mim install mmengine
-#mim install 'mmcv>=2.0.0rc4'
-#mim install 'mmdet>=3.0.0'
-#mim install "mmdet3d>=1.1.0"
- pip install mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.10.0/index.html
- pip install mmdet==2.14.0
- pip install mmsegmentation==0.14.1
+pip install mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.10.0/index.html
+pip install mmdet==2.14.0
+pip install mmsegmentation==0.14.1
 cd Thirdparty
 git_clone "git clone https://github.com/JingwenWang95/mmdetection3d.git"
-#git clone https://github.com/open-mmlab/mmdetection3d.git -b dev-1.x
 cd mmdetection3d
 pip install -v -e .
 cd ../..
 
-highlight "building DSP-SLAM ..."
+highlight "building 3D_LiDAR_autolabeling-SLAM ..."
 if [ ! -d build ]; then
   mkdir build
 fi
 cd build
 conda_python_bin=`which python`
 conda_env_dir="$(dirname "$(dirname "$conda_python_bin")")"
-
-echo "$conda_env_dir"
-
 cmake \
   -DOpenCV_DIR="$(pwd)/../Thirdparty/opencv/build" \
   -DEigen3_DIR="$(pwd)/../Thirdparty/eigen/install/share/eigen3/cmake" \
   -DPangolin_DIR="$(pwd)/../Thirdparty/Pangolin/build" \
-  -DPYTHON_LIBRARIES="$conda_env_dir/lib/libpython3.8.so" \
-  -DPYTHON_INCLUDE_DIRS="$conda_env_dir/include/python3.8" \
-  -DPYTHON_EXECUTABLE="$conda_env_dir/bin/python3.8" \
+  -DPYTHON_LIBRARIES="$conda_env_dir/lib/libpython3.7m.so" \
+  -DPYTHON_INCLUDE_DIRS="$conda_env_dir/include/python3.7m" \
+  -DPYTHON_EXECUTABLE="$conda_env_dir/bin/python3.7" \
   ..
 make -j8
-
