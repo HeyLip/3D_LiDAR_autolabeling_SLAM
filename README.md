@@ -10,7 +10,7 @@
   year={2024}
 }
 
-# 2. Building HSNS-SLAM
+# 1. Building HSNS-SLAM
 
 Clone the repository:
 ```
@@ -47,7 +47,7 @@ make -j8
 
 After successfully building HSNS-SLAM, you will have **libHSNS-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
 
-# 3. Running HSNS-SLAM
+# 2. Running HSNS-SLAM
 
 ## Dataset
 You can download the example sequences and pre-trained network model weights (DeepSDF, MaskRCNN, PointPillars) from [here](https://liveuclac-my.sharepoint.com/:f:/g/personal/ucabjw4_ucl_ac_uk/Eh3nHv6D-LZHkuny4iNOexQBGdDVxloM_nwbEZdxeRfStw?e=sYO1Ot). It contains example sequences of [KITTI](http://www.cvlibs.net/datasets/kitti/eval_odometry.php), [Freiburg Cars](https://github.com/lmb-freiburg/unsup-car-dataset) and [Redwood Chairs](http://redwood-data.org/3dscan/dataset.html?c=chair) dataset.
@@ -70,10 +70,10 @@ If you want to create your own labels with your own detectors, you can follow th
 * 3D labels contains 3D detection boxes under [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) convention. Each `.lbl` file consits of a numpy array of size Nx7, where N is the number of objects detected. Each row of the array is a 3D detection box: [x, y, z, w, l, h, ry]. More information about the KITTI coordinate system can be found from [mmdetection3d](https://github.com/open-mmlab/mmdetection3d) or [KITTI website](http://www.cvlibs.net/publications/Geiger2013IJRR.pdf).
 * 2D labels contains MaskRCNN detection boxes and segmentation masks. Each `.lbl` file consists of of a dictionary with two keys: `pred_boxes` and `pred_masks`. Boxes and masks are stored as numpy array of size Nx4 and NxHxW.
 
-# 4. License
+# 3. License
 HSNS-SLAM includes the part of third-party open-source software DSP-SLAM, which itself includes third-party open-source software.
 DSP-SLAM includes the third-party open-source software ORB-SLAM2, which itself includes third-party open-source software. Each of these components have their own license.
 HSNS-SLAM is released under [GPLv3 license](LICENSE) in line with ORB-SLAM2. For a list of all code/library dependencies (and associated licenses), please see [Dependencies.md](Dependencies.md).
 
-# 6. Acknowledgements
+# 4. Acknowledgements
 Research presented here has been supported by the UCL Centre for Doctoral Training in Foundational AI under UKRI grant number EP/S021566/1. We thank [Wonbong Jang](https://sites.google.com/view/wbjang/home) and Adam Sherwood for fruitful discussions. We are also grateful to [Binbin Xu](https://www.doc.ic.ac.uk/~bx516/) and [Xin Kong](https://kxhit.github.io/) for their patient code testing!
