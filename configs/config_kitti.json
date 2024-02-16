@@ -4,7 +4,7 @@
   "path_label_3d": "../data/07/labels/pointpillars_labels",
   "Detector3D": {
     "config_path": "3D_LiDAR_autolabeling-SLAM/configs/config_pointpillars.py",
-    "weight_path": "data/weights/pointpillars/model.pth"
+    "weight_path": "pretrained/pointpillars/model.pth"
   },
   "min_bb_area": 1600,
   "min_mask_area": 1000,
