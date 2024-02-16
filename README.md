@@ -18,7 +18,7 @@ git clone --recursive https://github.com/JingwenWang95/DSP-SLAM.git
 ```
 
 ## Building script
-For your convenience, we provide a building script `build_cuda102.sh` and `build_cuda113.sh` which show step-by-step how DSP-SLAM is built and which dependencies are required. Those scripts will install everything for you including CUDA (version is specified in the script name) and assume you have CUDA driver (support at least CUDA 10.2) and Anaconda installed on your computer. You can select whichever you want. `e.g.` If you your GPU is RTX-30 series which doesn't support CUDA 10 you can try with the one with CUDA 11.3. 
+For your convenience, we provide a building script `build_cuda102.sh` and `build_cuda113.sh` which show step-by-step how HSNS-SLAM is built and which dependencies are required. Those scripts will install everything for you including CUDA (version is specified in the script name) and assume you have CUDA driver (support at least CUDA 10.2) and Anaconda installed on your computer. You can select whichever you want. `e.g.` If you your GPU is RTX-30 series which doesn't support CUDA 10 you can try with the one with CUDA 11.3. 
 
 You can simply run:
 
@@ -26,13 +26,13 @@ You can simply run:
 ./build_cuda***.sh --install-cuda --build-dependencies --create-conda-env
 ```
 
-and it will set up all the dependencies and build DSP-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build DSP-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
+and it will set up all the dependencies and build HSNS-SLAM for you. If you want to have a more flexible installation (use your own CUDA and Pytorch, build HSNS-SLAM with your own version of OpenCV, Eigen3, etc), Those scripts can also provide important guidance for you.
 
 
 ## CMake options:
-When building DSP-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
+When building HSNS-SLAM the following CMake options are mandatory: `PYTHON_LIBRARIES`, `PYTHON_INCLUDE_DIRS`, `PYTHON_EXECUTABLE`. Those must correspond to the same Python environment where your dependencies (PyTorch, mmdetection, mmdetection3d) are installed. Make sure these are correctly specified!
 
-Once you have set up the dependencies, you can build DSP-SLAM: 
+Once you have set up the dependencies, you can build HSNS-SLAM: 
 
 ```
 # (assume you are under HSNS-SLAM project directory)
@@ -45,7 +45,7 @@ cmake -DPYTHON_LIBRARIES={YOUR_PYTHON_LIBRARY_PATH} \
 make -j8
 ```
 
-After successfully building HSNS-SLAM, you will have **libDSP-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
+After successfully building HSNS-SLAM, you will have **libHSNS-SLAM.so**  at *lib* folder and the executables **HSNS_slam** and under project root directory.
 
 # 3. Running HSNS-SLAM
 
@@ -54,12 +54,12 @@ You can download the example sequences and pre-trained network model weights (De
 
 ## Run HSNS_slam
 
-After obtaining the 2 binary executables, you will need to suppy 4 parameters to run the program: 1. path to vocabulary 2. path to .yaml config file 3. path to sequence data directory 4. path to save map. Before running HSNS-SLAM, make sure you run `conda activate dsp-slam` to activate the correct Python environmrnt. Here are some example usages:
+After obtaining the 2 binary executables, you will need to suppy 4 parameters to run the program: 1. path to vocabulary 2. path to .yaml config file 3. path to sequence data directory 4. path to save map. Before running HSNS-SLAM, make sure you run `conda activate HSNS-slam` to activate the correct Python environmrnt. Here are some example usages:
 
 For KITTI sequence for example, you can run:
 
 ```
-./dsp_slam Vocabulary/ORBvoc.bin configs/KITTI04-12.yaml data/kitti/07 map/kitti/07
+./HSNS_slam Vocabulary/ORBvoc.bin configs/KITTI04-12.yaml data/kitti/07 map/kitti/07
 ```
 
 ### Run HSNS-SLAM with offline detector
