@@ -1,3 +1,0 @@
-/home/harim/CLionProjects/DSP-SLAM/Thirdparty/DBoW2/build/CMakeFiles/rebuild_cache.dir
-/home/harim/CLionProjects/DSP-SLAM/Thirdparty/DBoW2/build/CMakeFiles/edit_cache.dir
-/home/harim/CLionProjects/DSP-SLAM/Thirdparty/DBoW2/build/CMakeFiles/DBoW2.dir
