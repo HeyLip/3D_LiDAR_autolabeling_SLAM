@@ -39,7 +39,8 @@ highlight "Starting 3D_LiDAR_autolabeling-SLAM build script ..."
 echo "Available parameters:
         --install-cuda
         --build-dependencies
-        --create-conda-env"
+        --create-conda-env
+        --install-pybind11"
 
 highlight "Installing system-wise packages ..."
 sudo apt-get update > /dev/null 2>&1 &&
@@ -55,6 +56,18 @@ sudo apt-get install -y \
   libwayland-dev \
   libxkbcommon-dev \
   wayland-protocols
+
+# install pybind11
+if [[ $* == *--install-pybind11 ]] ; then
+  highlight "Installing pybind11 ..."
+  git_clone "git clone https://github.com/pybind/pybind11.git"
+  cd pybind11
+  git checkout 70a58c5
+  cd ..
+  
+fi # --create-conda-env
+
+
 
 # install CUDA 11.3
 if [[ $* == *--install-cuda* ]] ; then
