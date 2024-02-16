@@ -14,7 +14,7 @@
 
 Clone the repository:
 ```
-git clone --recursive https://github.com/JingwenWang95/DSP-SLAM.git
+git clone --recursive https://github.com/HeyLip/HSNS_SLAM.git
 ```
 
 ## Building script
