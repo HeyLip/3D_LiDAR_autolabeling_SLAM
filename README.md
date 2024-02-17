@@ -2,7 +2,7 @@
 
 
 
-<a href="https://youtu.be/xc8WTAzaojE?si=GdG4wGwFMSqKU9z7" target="_blank"><img width="240" height="180" border="10" alt="3D_LiDAR_autolabeling_SLAM" src="https://github.com/HeyLip/3D_LiDAR_autolabeling_SLAM/assets/102511107/39f66267-45f9-4dff-bef9-d29c6f4fe9b8">
+<a href="https://youtu.be/xc8WTAzaojE?si=GdG4wGwFMSqKU9z7" target="_blank"><img width="480" height="360" border="10" alt="3D_LiDAR_autolabeling_SLAM" src="https://github.com/HeyLip/3D_LiDAR_autolabeling_SLAM/assets/102511107/39f66267-45f9-4dff-bef9-d29c6f4fe9b8">
 
 # 1. Building 3D_LiDAR_autolabeling-SLAM
 
